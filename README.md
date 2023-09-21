@@ -1,3 +1,6 @@
+##Visit website from here:https://bh-badreddine.github.io/weather-app/
+####In this project, I developed a website enabling users to input a city's name and access both its current weather and the forecast for the next five days.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
