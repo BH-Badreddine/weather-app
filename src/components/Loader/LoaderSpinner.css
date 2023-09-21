@@ -1,0 +1,45 @@
+.loader-container {
+    min-height: 250px;
+    width: 40%;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.653);
+    box-shadow: 0 0 20px black;
+    position: relative;
+  }
+  .loader-container p {
+    position: absolute;
+    top: 54%;
+    left: 38%;
+    font-size: 20px;
+    width: 122px;
+  }
+.loader {
+    position: absolute;
+      top: 35%;
+      left: 45%;
+  }
+  @media all and (max-width:866px) {
+    .loader {
+        left: 43% !important;
+    }
+    .loader-container p {
+      left: 33% !important;
+    }
+  }
+  @media all and (max-width: 754px) {
+    .loader {
+        left: 40% !important;
+    }
+    .loader-container p {
+      left: 30% !important;
+    }
+  }
+ 
+  @media all and (max-width:576px) {
+    .loader-container p {
+      left: 29% !important;
+      font-size: 16px;
+    }
+  }
+  
+ 
