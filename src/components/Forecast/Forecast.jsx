@@ -39,7 +39,7 @@ const simplifyData = (data) => {
             <p className='forecastDate mt-1'> {item.date} </p>
           </div>
           <div className="col-md-4 col-sm-5  weather-img-container">
-            <img src={`${process.env.PUBLIC_URL}/icons2/${item.icon}.PNG`} height='80%' width='100%' alt="weather" />
+            <img src={`${process.env.PUBLIC_URL}/icons2/${item.icon}.png`} height='80%' width='100%' alt="weather" />
           </div>
         </div>
         <p className='temp'>  {/* some regions(ex:Hawaî) have temperature at 6h higher than the temperature at 15h 
