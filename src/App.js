@@ -1,7 +1,7 @@
 import './App.css';
 import SearchBar from './components/Search/SearchBar';
 import { WEATHER_API_KEY, GEOCODING_API_URL, WEATHER_API_URL, GET_COUNTRY_URL, COUNTRY_OPTIONS } from './api';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CurrentWeather from './components/Current/CurrentWeather';
 import Forecast from './components/Forecast/Forecast';
 import LoaderSpinner from './components/Loader/LoaderSpinner';
@@ -21,23 +21,35 @@ function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecastWeather, setForecastWeather] = useState(null);
 
-  //Taking only 5 records(1 record at 12H00 for each day from the 5 forecast days)
+  //Taking only records at 6h and 15h 
   const getFiveDaysForecast = async (data) => {
+  
     try {
       let forecastDays = [];
-      //*** Getting the index of the day tomorrow at 12:00:00 */
+      //*** Getting the index of the day tomorrow at 06:00:00 */
       const inputDate = new Date(data.list[0].dt_txt);
 
       inputDate.setDate(inputDate.getDate() + 1);
-      // Set the time to 12:00:00(il y a un décalage horraire)
-      inputDate.setHours(13, 0, 0, 0);
+      
+      // Set the time to 6:00:00(il y a un décalage horraire)
+      inputDate.setHours(7, 0, 0, 0);
+      
       // Format the resulting date as a string
       const tomorrowDate = inputDate.toISOString().slice(0, 19).replace('T', ' ');
       const startIndex = data.list.findIndex((item) => item.dt_txt === tomorrowDate);
-
-      //*** Get the 5 forecast days at 12:00:00 */
-      for (let i = startIndex; i < data.list.length; i += 8) {
+      
+      //*** Get the 5 forecast days at 6:00:00 and 15:00:00 */
+      
+      let i = startIndex;
+      let step = 3;
+    
+      while(i < data.list.length) {
         forecastDays.push(data.list[i]);
+        i += step;
+        step = (step==3) ? 5 : 3; /*step: 3 PUIS 5 PUIS 3 PUIS 5 ... */
+        if(i == data.list.length) { /*Handling the last record: s'il ne y a pas un record du dernier jour à 15h, je prends celui de 12h */
+          i -= 1;
+        }
       }
 
       setForecastWeather(forecastDays.map(item => {
@@ -117,6 +129,9 @@ function App() {
       console.error('Error:', error);
     }
   }
+
+
+ 
  
   return (
     <div className="App">
@@ -152,7 +167,7 @@ function App() {
 
         </div>)
       }
-
+      
     </div>
   );
 }

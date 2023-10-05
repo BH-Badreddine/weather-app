@@ -17,7 +17,7 @@ export default function CurrentWeather({ data }) {
         </div>
 
        <div className="col-md-3 col-sm-3 weather-icon">
-        <img src={`icons2/${data.weather[0].icon}.png`} alt="" />
+        <img src={`${process.env.PUBLIC_URL}/icons2/${data.weather[0].icon}.png`} alt="" />
        </div>
 
         <div className="col-md-2 col-sm-3 flag-container mt-1">
